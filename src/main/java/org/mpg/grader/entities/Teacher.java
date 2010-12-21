@@ -6,7 +6,7 @@ import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 
 import org.apache.tapestry5.beaneditor.Validate;
 
@@ -17,7 +17,7 @@ public class Teacher {
     @Validate("required")
 	private String lastName;
 
-    @OneToMany
+    @ManyToMany
     @Column(nullable = true)
     private List<Subject> subjects;
 
