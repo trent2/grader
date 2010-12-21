@@ -23,11 +23,11 @@ public class HibernateListPalette {
 	@Property
 	private PropertyEditContext context;
 
-	@Parameter(required = true, allowNull = false, defaultPrefix = BindingConstants.LITERAL)
+	@Parameter(required = true, allowNull = false)
 	@Property
-	private String entityClass;
+	private Class<?> entityClass;
 
-	@Parameter(required = true, defaultPrefix = BindingConstants.LITERAL)
+	@Parameter(defaultPrefix = BindingConstants.LITERAL)
 	@Property
 	private String entityId;
 
@@ -48,14 +48,14 @@ public class HibernateListPalette {
 
 	@Component(parameters = { "selected=prop:context.propertyValue",
 			"encoder=prop:encoder", "model=prop:listModel",
-			"label=prop:context.label"})   //, "clientId=prop:context.propertyId" })
+			"label=prop:context.label"})
 	private Palette listPalette;
 
 	@SuppressWarnings("unchecked")
 	public ValueEncoder<?> getEncoder() throws ClassNotFoundException {
-		Class<?> eClass = Class.forName(entityClass);
-		return new HibernateEntityValueEncoder(eClass, sessionsource
-				.getConfiguration().getClassMapping(eClass.getCanonicalName()),
+ 
+		return new HibernateEntityValueEncoder(entityClass, sessionsource
+				.getConfiguration().getClassMapping(entityClass.getCanonicalName()),
 				session, paccess, coercer, logger);
 	}
 
