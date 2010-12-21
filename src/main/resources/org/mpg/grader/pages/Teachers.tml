@@ -1,0 +1,15 @@
+<html t:type="layout" title="${message:heading}" sidebarTitle="${message:sidebar-title}"
+  xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd"
+  xmlns:p="tapestry:parameter">
+
+  <ul>
+    <li><t:pagelink page="teacher/create">${message:create}</t:pagelink></li>
+    <li><t:pagelink page="teacher/createFromList">${message:createfromlist}</t:pagelink></li>
+<!--   <li><t:pagelink page="teacher/mapToGroup">${message:maptogroup}</t:pagelink></li>
+    <li><t:pagelink page="teacher/mapToSubject">${message:maptosubject}</t:pagelink></li> -->
+  </ul>
+
+  <p:sidebar>
+  	<t:grid source="teachers" />
+  </p:sidebar>
+</html>

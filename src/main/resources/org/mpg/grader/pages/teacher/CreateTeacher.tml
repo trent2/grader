@@ -1,0 +1,11 @@
+<html t:type="layout" title="${message:title}"
+	xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+	<body>
+		<t:beaneditform object="teacher" t:submitLabel="message:create">
+			<t:parameter name="subjects">
+				<t:hibernatelistpalette t:id="subjects" entityClass="org.mpg.grader.entities.Subject"
+					entityId="subjectName" selected="teacher.subjects"/>
+			</t:parameter>
+		</t:beaneditform>
+	</body>
+</html>

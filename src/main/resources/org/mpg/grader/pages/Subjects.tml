@@ -1,0 +1,12 @@
+<html t:type="layout" title="${message:heading}"
+  xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+
+  <ul>
+    <li><t:pagelink page="subject/create">${message:create}</t:pagelink></li>
+<!--    <li><t:pagelink page="subject/createFromList">${message:createfromlist}</t:pagelink></li>
+   <li><t:pagelink page="subject/mapToGroup">${message:maptogroup}</t:pagelink></li>
+    <li><t:pagelink page="subject/mapToSubject">${message:maptosubject}</t:pagelink></li> -->
+  </ul>
+
+  <t:grid source="subjects" />
+</html>
