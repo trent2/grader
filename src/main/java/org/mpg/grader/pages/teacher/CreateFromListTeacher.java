@@ -24,7 +24,7 @@ public class CreateFromListTeacher {
     	for(String teacher : teacherArray) {
     		Teacher t = new Teacher();
     		t.setLastName(teacher.trim());
-    		teacherDAO.add(t);
+    		teacherDAO.saveOrUpdate(t);
     	}
 
         return teachers;

@@ -13,14 +13,13 @@ import org.apache.tapestry5.ioc.ServiceBinder;
 import org.apache.tapestry5.ioc.annotations.Local;
 import org.apache.tapestry5.ioc.annotations.Match;
 import org.apache.tapestry5.services.BeanBlockContribution;
-import org.apache.tapestry5.services.EditBlockContribution;
 import org.apache.tapestry5.services.Request;
 import org.apache.tapestry5.services.RequestFilter;
 import org.apache.tapestry5.services.RequestHandler;
 import org.apache.tapestry5.services.Response;
-import org.mpg.grader.data.SubjectDAO;
+import org.mpg.grader.data.CriterionDAO;
 import org.mpg.grader.data.TeacherDAO;
-import org.mpg.grader.internals.data.SubjectDAOImpl;
+import org.mpg.grader.internals.data.CriteriaDAOImpl;
 import org.mpg.grader.internals.data.TeacherDAOImpl;
 import org.slf4j.Logger;
 
@@ -35,7 +34,7 @@ public class AppModule
         // binder.bind(MyServiceInterface.class, MyServiceImpl.class);
     	
     	binder.bind(TeacherDAO.class, TeacherDAOImpl.class);
-    	binder.bind(SubjectDAO.class, SubjectDAOImpl.class);
+    	binder.bind(CriterionDAO.class, CriteriaDAOImpl.class);
 
         // Make bind() calls on the binder object to define most IoC services.
         // Use service builder methods (example below) when the implementation
@@ -44,14 +43,15 @@ public class AppModule
     }
     
     @SuppressWarnings("unchecked")
-	public static void contributeDefaultDataTypeAnalyzer(MappedConfiguration<Class, String> configuration)
+	public static void  contributeDefaultDataTypeAnalyzer(MappedConfiguration<Class<?>, String> configuration)
     {
-      configuration.add(List.class, "list");
+    	configuration.add(List.class, "list");
     }
 
     public static void contributeBeanBlockSource(Configuration<BeanBlockContribution> configuration)
     {
-      configuration.add(new EditBlockContribution("list", "AppPropertyEditBlocks", "listBlock"));
+//      configuration.add(new DisplayBlockContribution("list", "AppPropertyDisplayBlocks", "listBlock"));
+//      configuration.add(new EditBlockContribution("list", "AppPropertyEditBlocks", "listBlock"));
     }
     
     @Match("*DAO")
@@ -106,7 +106,8 @@ public class AppModule
     {
         return new RequestFilter()
         {
-            public boolean service(Request request, Response response, RequestHandler handler)
+            @Override
+			public boolean service(Request request, Response response, RequestHandler handler)
                     throws IOException
             {
                 long startTime = System.currentTimeMillis();

@@ -1,6 +1,6 @@
 <html t:type="layout" title="${message:title}"
       xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
   <body>
-    <t:beaneditform submitlabel="${message:create}" object="subject" exclude="teachers" />
+    <t:beaneditform submitlabel="${message:create}" object="criterion" exclude="teachers" />
   </body>
 </html>

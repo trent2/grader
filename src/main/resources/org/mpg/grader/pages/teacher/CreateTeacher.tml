@@ -2,9 +2,9 @@
 	xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
 	<body>
 		<t:beaneditform object="teacher" t:submitLabel="message:create">
-			<t:parameter name="subjects">
-				<t:hibernatelistpalette t:id="subjects" entityClass="SubjectClass"
-				selected="teacher.subjects"/>
+			<t:parameter name="criteria">
+				<t:hibernatelistpalette t:id="criteria" entityClass="CriterionClass" entityId="criterionName"
+				selected="teacher.criteria"/>
 			</t:parameter>
 		</t:beaneditform>
 	</body>

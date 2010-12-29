@@ -1,19 +1,16 @@
 package org.mpg.grader.entities;
 
-import java.util.List;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 
 import org.apache.tapestry5.beaneditor.NonVisual;
 import org.apache.tapestry5.beaneditor.Validate;
 
 @Entity
-public class Teacher {
+public class Criterion {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,13 +18,12 @@ public class Teacher {
     private Long id;
 
     @Validate("required")
-	private String lastName;
+	private String criterionName;
 
-    @ManyToMany
-    @Column(nullable = true)
-    private List<Criterion> criteria;
+    @Column(length = 80)
+    private String shortDescription;
 
-    public Long getId() {
+	public Long getId() {
 		return id;
 	}
 
@@ -35,19 +31,24 @@ public class Teacher {
 		this.id = id;
 	}
 
-	public String getLastName() {
-		return lastName;
+	public String getCriterionName() {
+		return criterionName;
 	}
 
-	public void setLastName(String lastName) {
-		this.lastName = lastName;
+	public void setCriterionName(String subName) {
+		this.criterionName = subName;
 	}
 
-	public List<Criterion> getCriteria() {
-		return criteria;
+	public String getShortDescription() {
+		return shortDescription;
 	}
 
-	public void setCriteria(List<Criterion> criteria) {
-		this.criteria = criteria;
+	public void setShortDescription(String shortDescription) {
+		this.shortDescription = shortDescription;
+	}
+
+	@Override
+	public String toString() {
+		return criterionName;
 	}
 }

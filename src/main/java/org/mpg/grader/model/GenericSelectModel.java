@@ -28,10 +28,12 @@ public class GenericSelectModel<T> extends AbstractSelectModel {
 		this.list = list;
 	}
 
+	@Override
 	public List<OptionGroupModel> getOptionGroups() {
 		return null;
 	}
 
+	@Override
 	public List<OptionModel> getOptions() {
 		List<OptionModel> optionModelList = new ArrayList<OptionModel>();
 		for (T obj : list) {

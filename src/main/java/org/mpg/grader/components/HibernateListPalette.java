@@ -18,6 +18,7 @@ import org.hibernate.Session;
 import org.mpg.grader.model.GenericSelectModel;
 import org.slf4j.Logger;
 
+@SuppressWarnings({ "unchecked", "rawtypes" })
 public class HibernateListPalette {
 	@Environmental
 	@Property
@@ -51,15 +52,12 @@ public class HibernateListPalette {
 			"label=prop:context.label"})
 	private Palette listPalette;
 
-	@SuppressWarnings("unchecked")
-	public ValueEncoder<?> getEncoder() throws ClassNotFoundException {
- 
+	public ValueEncoder<?> getEncoder() { 
 		return new HibernateEntityValueEncoder(entityClass, sessionsource
 				.getConfiguration().getClassMapping(entityClass.getCanonicalName()),
 				session, paccess, coercer, logger);
 	}
 
-	@SuppressWarnings("unchecked")
 	public SelectModel getListModel() {
 		return new GenericSelectModel(session.createCriteria(entityClass).list(),
 				entityId, paccess);
