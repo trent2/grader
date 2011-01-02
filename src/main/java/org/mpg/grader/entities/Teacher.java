@@ -1,13 +1,9 @@
 package org.mpg.grader.entities;
 
-import java.util.List;
-
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 
 import org.apache.tapestry5.beaneditor.NonVisual;
 import org.apache.tapestry5.beaneditor.Validate;
@@ -23,9 +19,8 @@ public class Teacher {
     @Validate("required")
 	private String lastName;
 
-    @ManyToMany
-    @Column(nullable = true)
-    private List<Criterion> criteria;
+    @Validate("required")
+    private String shorty;
 
     public Long getId() {
 		return id;
@@ -43,11 +38,11 @@ public class Teacher {
 		this.lastName = lastName;
 	}
 
-	public List<Criterion> getCriteria() {
-		return criteria;
+	public String getShorty() {
+		return shorty;
 	}
 
-	public void setCriteria(List<Criterion> criteria) {
-		this.criteria = criteria;
+	public void setShorty(String shorty) {
+		this.shorty = shorty;
 	}
 }

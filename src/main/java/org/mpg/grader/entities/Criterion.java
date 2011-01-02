@@ -21,6 +21,7 @@ public class Criterion {
 	private String criterionName;
 
     @Column(length = 80)
+    @Validate("maxlength=80")
     private String shortDescription;
 
 	public Long getId() {
