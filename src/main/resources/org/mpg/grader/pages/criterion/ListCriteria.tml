@@ -1,0 +1,17 @@
+<html t:type="layout" title="${message:title}"
+	xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd" xmlns:p="tapestry:parameter">
+	<body>
+		<div>
+			<t:grid source="criteria" row="criterion" add="delete, update">
+				<p:deletecell>
+					<t:actionlink t:id="deleteCriterion" context="criterion">${message:delete}
+					</t:actionlink>
+				</p:deletecell>
+				<p:updatecell>
+					<t:pagelink t:id="updateCriterion" page="criterion/create" context="criterion">${message:update}
+					</t:pagelink>
+				</p:updatecell>
+			</t:grid>
+		</div>
+	</body>
+</html>

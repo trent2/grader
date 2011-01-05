@@ -216,7 +216,7 @@ a:hover {
 
 #sidebar {
     float: right;
-    width: 300px;
+    width: 500px;
     margin-top: 30px;
 }
 
@@ -242,7 +242,7 @@ a:hover {
 
 #sidebar h2 {
     padding: 30px 30px 5px 10px;
-    background: url( images/img09.gif ) no-repeat;
+    # background: url( images/img09.gif ) no-repeat;
     text-transform: lowercase;
     font-weight: normal;
     font-size: 1.6em;

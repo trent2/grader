@@ -8,6 +8,7 @@ import javax.persistence.Id;
 
 import org.apache.tapestry5.beaneditor.NonVisual;
 import org.apache.tapestry5.beaneditor.Validate;
+import org.mpg.grader.internals.tools.SchoolDate;
 
 @Entity
 public class PupilGroup {
@@ -23,6 +24,13 @@ public class PupilGroup {
     @Validate("required, maxlength=80")
     @Column(length=80)
     private String longName;
+
+    @Validate("required, regexp, maxlength=9")
+    private String schoolYear;
+
+    public PupilGroup() {
+    	schoolYear = SchoolDate.getCurrentSchoolYear();
+    }
 
 	public Long getId() {
 		return id;
@@ -46,6 +54,14 @@ public class PupilGroup {
 
 	public void setLongName(String longName) {
 		this.longName = longName;
+	}
+
+	public String getSchoolYear() {
+		return schoolYear;
+	}
+
+	public void setSchoolYear(String schoolYear) {
+		this.schoolYear = schoolYear;
 	}
 
 	@Override

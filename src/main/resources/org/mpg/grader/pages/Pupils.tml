@@ -1,0 +1,29 @@
+<html t:type="layout" title="${message:heading}" sidebarTitle="${message:sidebar-title}"
+	xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd" xmlns:p="tapestry:parameter">
+
+	<ul>
+		<li>
+			<t:pagelink page="pupil/create">${message:create}</t:pagelink>
+		</li>
+	
+		<li>
+			<t:pagelink page="pupil/createGroup">${message:creategroup}</t:pagelink>
+		</li>
+		<li>
+			<t:pagelink page="pupil/createFromList">${message:createfromlist}</t:pagelink>
+		</li>
+		
+	</ul>
+	<p:sidebar>
+		<t:grid source="pupilgroups" row="pupilgroup" add="delete, update">
+			<p:deletecell>
+				<t:actionlink t:id="delete" context="pupilgroup">${message:delete}
+				</t:actionlink>
+			</p:deletecell>
+			<p:updatecell>
+				<t:pagelink t:id="update" page="pupil/create" context="pupilgroup">${message:update}
+				</t:pagelink>
+			</p:updatecell>
+		</t:grid>
+	</p:sidebar>
+</html>

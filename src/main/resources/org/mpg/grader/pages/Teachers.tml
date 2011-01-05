@@ -19,8 +19,8 @@
 				</t:actionlink>
 			</p:deletecell>
 			<p:updatecell>
-				<t:actionlink t:id="update" context="teacher">${message:update}
-				</t:actionlink>
+				<t:pagelink t:id="update" page="teacher/create" context="teacher">${message:update}
+				</t:pagelink>
 			</p:updatecell>
 		</t:grid>
 	</p:sidebar>

@@ -1,0 +1,12 @@
+<html t:type="layout" title="message:title"
+	xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
+	<body>
+	<p>${message:instructions}</p>
+		<t:form>
+			<t:TextArea value="pupillist" />
+			<p>
+			<t:submit t:id="create" value="message:create" />
+			</p>
+		</t:form>
+	</body>
+</html>

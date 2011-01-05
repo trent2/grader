@@ -4,25 +4,30 @@ import org.apache.tapestry5.annotations.InjectPage;
 import org.apache.tapestry5.annotations.PageActivationContext;
 import org.apache.tapestry5.annotations.Property;
 import org.apache.tapestry5.ioc.annotations.Inject;
-import org.mpg.grader.data.CriterionDAO;
+import org.mpg.grader.data.SubjectDAO;
 import org.mpg.grader.entities.Criterion;
+import org.mpg.grader.entities.Subject;
 import org.mpg.grader.pages.Criteria;
 
-public class CreateCriterion {
+public class CreateSubject {
 
     @Inject
-    private CriterionDAO criterionDAO;
+    private SubjectDAO subjectDAO;
 
     @InjectPage
     private Criteria criteria;
 
     @PageActivationContext
     @Property
-    private Criterion criterion;
+    private Subject subject;
 
-	Object onSuccess()
+    public Class<Criterion> getCriterionClass() {
+    	return Criterion.class;
+    }
+
+    Object onSuccess()
     {
-        criterionDAO.saveOrUpdate(criterion);
+        subjectDAO.saveOrUpdate(subject);
 
         return criteria;
     }

@@ -1,36 +1,28 @@
 package org.mpg.grader.pages;
 
-import java.util.List;
-
-import org.apache.tapestry5.annotations.InjectPage;
 import org.apache.tapestry5.annotations.Property;
+import org.apache.tapestry5.grid.GridDataSource;
+import org.apache.tapestry5.hibernate.HibernateGridDataSource;
 import org.apache.tapestry5.ioc.annotations.Inject;
-import org.mpg.grader.data.CriterionDAO;
-import org.mpg.grader.entities.Criterion;
-import org.mpg.grader.pages.criterion.CreateCriterion;
+import org.hibernate.Session;
+import org.mpg.grader.data.SubjectDAO;
+import org.mpg.grader.entities.Subject;
 
 public class Criteria {
+	@Inject
+	private SubjectDAO subjectDAO;
 
 	@Inject
-	private CriterionDAO criterionDAO;
+	private Session session;
 
 	@Property
-	private Criterion criterion;
+	private Subject subject;
 
-	@InjectPage
-	private CreateCriterion updateCriterion;
-
-	public List<Criterion> getCriteria() {
-		return criterionDAO.listAll();
+	public GridDataSource getSubjects() {
+		return new HibernateGridDataSource(session, Subject.class);		
 	}
 
-	public void onActionFromDelete(Criterion crit) {
-		criterionDAO.delete(crit);
+	public void onActionFromDeleteSubject(Subject subj) {
+		subjectDAO.delete(subj);
 	}
-
-	public Object onActionFromUpdate(Criterion crit) {
-		updateCriterion.setCriterion(crit);
-		return updateCriterion;
-	}
-
 }

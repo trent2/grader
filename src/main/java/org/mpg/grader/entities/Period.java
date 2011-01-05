@@ -8,6 +8,7 @@ import javax.persistence.Id;
 
 import org.apache.tapestry5.beaneditor.NonVisual;
 import org.apache.tapestry5.beaneditor.Validate;
+import org.mpg.grader.internals.tools.SchoolDate;
 
 @Entity
 public class Period {
@@ -21,13 +22,13 @@ public class Period {
 
     @Validate("required, regexp, maxlength=9")
     @Column(length=9, nullable=false)
-    private String year;
+    private String schoolYear;
 
     @Validate("required")
     private SchoolTerm schoolTerm;
 
     public Period() {
-    	year = "2010/2011";
+    	schoolYear = SchoolDate.getCurrentSchoolYear();
     }
 
 	public Long getId() {
@@ -38,12 +39,12 @@ public class Period {
 		this.id = id;
 	}
 
-	public String getYear() {
-		return year;
+	public String getSchoolYear() {
+		return schoolYear;
 	}
 
-	public void setYear(String year) {
-		this.year = year;
+	public void setSchoolYear(String schoolYear) {
+		this.schoolYear = schoolYear;
 	}
 
 	public SchoolTerm getSchoolTerm() {

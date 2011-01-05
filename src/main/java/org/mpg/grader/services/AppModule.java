@@ -17,10 +17,8 @@ import org.apache.tapestry5.services.Request;
 import org.apache.tapestry5.services.RequestFilter;
 import org.apache.tapestry5.services.RequestHandler;
 import org.apache.tapestry5.services.Response;
-import org.mpg.grader.data.CriterionDAO;
-import org.mpg.grader.data.TeacherDAO;
-import org.mpg.grader.internals.data.CriteriaDAOImpl;
-import org.mpg.grader.internals.data.TeacherDAOImpl;
+import org.mpg.grader.data.*;
+import org.mpg.grader.internals.data.*;
 import org.slf4j.Logger;
 
 /**
@@ -34,7 +32,11 @@ public class AppModule
         // binder.bind(MyServiceInterface.class, MyServiceImpl.class);
     	
     	binder.bind(TeacherDAO.class, TeacherDAOImpl.class);
-    	binder.bind(CriterionDAO.class, CriteriaDAOImpl.class);
+    	binder.bind(CriterionDAO.class, CriterionDAOImpl.class);
+    	binder.bind(PupilDAO.class, PupilDAOImpl.class);
+    	binder.bind(PupilGroupDAO.class, PupilGroupDAOImpl.class);
+    	binder.bind(SubjectDAO.class, SubjectDAOImpl.class);
+    	binder.bind(PeriodDAO.class, PeriodDAOImpl.class);
 
         // Make bind() calls on the binder object to define most IoC services.
         // Use service builder methods (example below) when the implementation
@@ -69,7 +71,7 @@ public class AppModule
         // you can extend this list of locales (it's a comma separated series of locale names;
         // the first locale name is the default when there's no reasonable match).
         
-        configuration.add(SymbolConstants.SUPPORTED_LOCALES, "en");
+        configuration.add(SymbolConstants.SUPPORTED_LOCALES, "de");
 
         // The factory default is true but during the early stages of an application
         // overriding to false is a good idea. In addition, this is often overridden
