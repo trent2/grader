@@ -1,5 +1,6 @@
 package org.mpg.grader.entities;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -9,7 +10,7 @@ import org.apache.tapestry5.beaneditor.NonVisual;
 import org.apache.tapestry5.beaneditor.Validate;
 
 @Entity
-public class Teacher {
+public class Teacher implements Comparable<Teacher> {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -17,9 +18,11 @@ public class Teacher {
     private Long id;
 
     @Validate("required")
+    @Column(nullable = false)
 	private String lastName;
 
-    @Validate("required")
+    @Validate("required, maxlength=10")
+    @Column(length=10, nullable = false)
     private String shorty;
 
     public Long getId() {
@@ -44,5 +47,15 @@ public class Teacher {
 
 	public void setShorty(String shorty) {
 		this.shorty = shorty;
+	}
+
+	@Override
+	public String toString() {
+		return shorty;
+	}
+
+	@Override
+	public int compareTo(Teacher o) {
+		return shorty.compareTo(o.shorty);
 	}
 }

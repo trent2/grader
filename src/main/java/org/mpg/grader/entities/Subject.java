@@ -13,13 +13,14 @@ import org.apache.tapestry5.beaneditor.NonVisual;
 import org.apache.tapestry5.beaneditor.Validate;
 
 @Entity
-public class Subject {
+public class Subject implements Comparable<Subject> {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NonVisual
     private Long id;
 
     @Validate("required")
+    @Column(nullable = false)
 	private String subjectName;
 
     public enum FormTypes {Jgst_5, Jgst_6, Jgst_7};
@@ -65,5 +66,10 @@ public class Subject {
 	@Override
 	public String toString() {
 		return subjectName;
+	}
+
+	@Override
+	public int compareTo(Subject o) {
+		return subjectName.compareTo(o.subjectName);
 	}
 }

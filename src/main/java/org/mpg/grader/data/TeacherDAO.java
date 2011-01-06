@@ -2,5 +2,5 @@ package org.mpg.grader.data;
 
 import org.mpg.grader.entities.Teacher;
 
-public interface TeacherDAO extends NumericIdDAO<Teacher> {
+public interface TeacherDAO extends BasicDAO<Teacher> {
 }

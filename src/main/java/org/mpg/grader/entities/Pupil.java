@@ -19,12 +19,12 @@ public class Pupil {
     @NonVisual
     private Long id;
 
-    @Column(length = 30)
     @Validate("required, maxlength=30")
+    @Column(length = 30, nullable = false)
 	private String lastName;
 
-    @Column(length = 30)
     @Validate("required, maxlength=30")
+    @Column(length = 30, nullable = false)
 	private String firstName;
 
     @ManyToMany

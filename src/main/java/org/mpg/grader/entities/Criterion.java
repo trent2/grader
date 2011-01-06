@@ -18,10 +18,11 @@ public class Criterion {
     private Long id;
 
     @Validate("required")
+    @Column(nullable = false)
 	private String criterionName;
 
-    @Column(length = 80)
     @Validate("maxlength=80")
+    @Column(length = 80, nullable = false)
     private String shortDescription;
 
 	public Long getId() {

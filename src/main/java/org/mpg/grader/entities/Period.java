@@ -11,11 +11,12 @@ import org.apache.tapestry5.beaneditor.Validate;
 import org.mpg.grader.internals.tools.SchoolDate;
 
 @Entity
-public class Period {
+public class Period implements Comparable<Period> {
+	public enum SchoolTerm {
+		 Erste_Konferenz, Zweite_Konferenz, Dritte_Konferenz
+	}
 
-	public enum SchoolTerm { Erste_Konferenz, Zweite_Konferenz, Dritte_Konferenz };
-
-    @Id
+	@Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @NonVisual
     private Long id;
@@ -25,6 +26,7 @@ public class Period {
     private String schoolYear;
 
     @Validate("required")
+    @Column(nullable = false)
     private SchoolTerm schoolTerm;
 
     public Period() {
@@ -53,5 +55,15 @@ public class Period {
 
 	public void setSchoolTerm(SchoolTerm schoolTerm) {
 		this.schoolTerm = schoolTerm;
+	}
+
+	@Override
+	public String toString() {
+		return schoolYear;
+	}
+
+	@Override
+	public int compareTo(Period o) {
+		return (schoolYear + schoolTerm).compareTo(o.schoolYear + o.schoolTerm);
 	}
 }

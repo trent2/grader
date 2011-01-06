@@ -1,19 +1,19 @@
 package org.mpg.grader.internals.data;
 
+import java.io.Serializable;
 import java.util.List;
 
 import org.apache.tapestry5.hibernate.HibernateSessionManager;
 import org.apache.tapestry5.ioc.annotations.Inject;
-import org.mpg.grader.data.NumericIdDAO;
+import org.mpg.grader.data.BasicDAO;
 
-public abstract class NumericIdDAOImpl<T> implements NumericIdDAO<T> {
-
+public abstract class BasicDAOImpl<T> implements BasicDAO<T> {
 	@Inject
 	HibernateSessionManager hsm;
 
-	private Class<T> entityClass;
+	Class<T> entityClass;
 
-	protected NumericIdDAOImpl (Class<T> eC) {
+	protected BasicDAOImpl (Class<T> eC) {
 		entityClass = eC;
 	}
 
@@ -28,12 +28,12 @@ public abstract class NumericIdDAOImpl<T> implements NumericIdDAO<T> {
 	}
 
 	@Override
-	public T findById(Long id) {
-		return (T)hsm.getSession().load(entityClass, id);
+	public List<T> listAll() {
+		return hsm.getSession().createCriteria(entityClass).list();
 	}
 
 	@Override
-	public List<T> listAll() {
-		return hsm.getSession().createCriteria(entityClass).list();
+	public T findById(Serializable id) {
+		return (T)hsm.getSession().get(entityClass, id);
 	}
 }
