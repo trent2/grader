@@ -1,7 +1,10 @@
 package org.mpg.grader.services;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import org.apache.tapestry5.SymbolConstants;
 import org.apache.tapestry5.hibernate.HibernateTransactionAdvisor;
@@ -12,13 +15,32 @@ import org.apache.tapestry5.ioc.OrderedConfiguration;
 import org.apache.tapestry5.ioc.ServiceBinder;
 import org.apache.tapestry5.ioc.annotations.Local;
 import org.apache.tapestry5.ioc.annotations.Match;
+import org.apache.tapestry5.ioc.services.Coercion;
+import org.apache.tapestry5.ioc.services.CoercionTuple;
 import org.apache.tapestry5.services.BeanBlockContribution;
+import org.apache.tapestry5.services.DisplayBlockContribution;
 import org.apache.tapestry5.services.Request;
 import org.apache.tapestry5.services.RequestFilter;
 import org.apache.tapestry5.services.RequestHandler;
 import org.apache.tapestry5.services.Response;
-import org.mpg.grader.data.*;
-import org.mpg.grader.internals.data.*;
+import org.mpg.grader.data.CriterionDAO;
+import org.mpg.grader.data.GradeListDAO;
+import org.mpg.grader.data.PeriodDAO;
+import org.mpg.grader.data.PupilDAO;
+import org.mpg.grader.data.PupilGroupDAO;
+import org.mpg.grader.data.SubjectDAO;
+import org.mpg.grader.data.TeacherDAO;
+import org.mpg.grader.entities.Period;
+import org.mpg.grader.entities.PupilGroup;
+import org.mpg.grader.entities.Subject;
+import org.mpg.grader.entities.Teacher;
+import org.mpg.grader.internals.data.CriterionDAOImpl;
+import org.mpg.grader.internals.data.GradeListDAOImpl;
+import org.mpg.grader.internals.data.PeriodDAOImpl;
+import org.mpg.grader.internals.data.PupilDAOImpl;
+import org.mpg.grader.internals.data.PupilGroupDAOImpl;
+import org.mpg.grader.internals.data.SubjectDAOImpl;
+import org.mpg.grader.internals.data.TeacherDAOImpl;
 import org.slf4j.Logger;
 
 /**
@@ -37,6 +59,7 @@ public class AppModule
     	binder.bind(PupilGroupDAO.class, PupilGroupDAOImpl.class);
     	binder.bind(SubjectDAO.class, SubjectDAOImpl.class);
     	binder.bind(PeriodDAO.class, PeriodDAOImpl.class);
+    	binder.bind(GradeListDAO.class, GradeListDAOImpl.class);
 
         // Make bind() calls on the binder object to define most IoC services.
         // Use service builder methods (example below) when the implementation
@@ -48,14 +71,23 @@ public class AppModule
 	public static void  contributeDefaultDataTypeAnalyzer(MappedConfiguration<Class<?>, String> configuration)
     {
     	configuration.add(List.class, "list");
+    	configuration.add(Set.class, "set");
+    	configuration.add(Teacher.class, "teacher");
+    	configuration.add(PupilGroup.class, "pupilGroup");
+    	configuration.add(Subject.class, "subject");
+    	configuration.add(Period.class, "period");
     }
 
     public static void contributeBeanBlockSource(Configuration<BeanBlockContribution> configuration)
     {
-//      configuration.add(new DisplayBlockContribution("list", "AppPropertyDisplayBlocks", "listBlock"));
-//      configuration.add(new EditBlockContribution("list", "AppPropertyEditBlocks", "listBlock"));
+      configuration.add(new DisplayBlockContribution("teacher", "AppPropertyDisplayBlocks", "teacherBlock"));
+      configuration.add(new DisplayBlockContribution("pupilGroup", "AppPropertyDisplayBlocks", "pupilGroupBlock"));
+      configuration.add(new DisplayBlockContribution("subject", "AppPropertyDisplayBlocks", "subjectBlock"));
+      configuration.add(new DisplayBlockContribution("period", "AppPropertyDisplayBlocks", "periodBlock"));
+//    	configuration.add(new EditBlockContribution("Teacher", "AppPropertyEditBlocks", "tBlock"));
     }
-    
+
+
     @Match("*DAO")
     public static void adviseTransactions(HibernateTransactionAdvisor advisor, MethodAdviceReceiver receiver)
     {
@@ -129,16 +161,36 @@ public class AppModule
                     log.info(String.format("Request time: %d ms", elapsed));
                 }
             }
-        };
+        }    ;
     }
-    
-    /**
-     * This is a contribution to the RequestHandler service configuration. This is how we extend
-     * Tapestry using the timing filter. A common use for this kind of filter is transaction
-     * management or security. The @Local annotation selects the desired service by type, but only
-     * from the same module.  Without @Local, there would be an error due to the other service(s)
-     * that implement RequestFilter (defined in other modules).
-     */
+
+	@SuppressWarnings("rawtypes")
+	public static void contributeTypeCoercer(
+			Configuration<CoercionTuple> configuration) {
+		Coercion<List, Set> listSetCoercion = new Coercion<List, Set>() {
+			@Override
+			public Set coerce(List input) {
+				return new HashSet(input);
+			}
+		};
+		Coercion<Set, List> setListCoercion = new Coercion<Set, List>() {
+			@Override
+			public List coerce(Set input) {
+				return new ArrayList(input);
+			}
+		};
+		configuration.add(new CoercionTuple<List, Set>(List.class, Set.class, listSetCoercion));
+		configuration.add(new CoercionTuple<Set, List>(Set.class, List.class, setListCoercion));
+	}
+
+	/**
+	 * This is a contribution to the RequestHandler service configuration. This
+	 * is how we extend Tapestry using the timing filter. A common use for this
+	 * kind of filter is transaction management or security. The @Local
+	 * annotation selects the desired service by type, but only from the same
+	 * module. Without @Local, there would be an error due to the other
+	 * service(s) that implement RequestFilter (defined in other modules).
+	 */
     public void contributeRequestHandler(OrderedConfiguration<RequestFilter> configuration,
             @Local
             RequestFilter filter)
