@@ -2,29 +2,13 @@ package org.mpg.grader.entities;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
-import javax.persistence.MapsId;
-import javax.persistence.OneToOne;
+
+import org.apache.tapestry5.beaneditor.Validate;
 
 @Entity
 public class GradeList {
 	@EmbeddedId
 	private GradeListCompositeId gradeListId;
-
-	@MapsId("period")
-	@OneToOne
-	private Period period;
-
-	@MapsId("subject")
-	@OneToOne
-	private Subject subject;
-
-	@MapsId("pupilGroup")
-	@OneToOne
-	private PupilGroup pupilGroup;
-	
-	@MapsId("teacher")
-	@OneToOne
-	private Teacher teacher;
 
 	public GradeList() {
 		gradeListId = new GradeListCompositeId();
@@ -36,19 +20,39 @@ public class GradeList {
 		this.gradeListId = gradeListId;
 	}
 
+	@Validate("required")
 	public Period getPeriod() {
-		return period;
+		return gradeListId.getPeriod();
 	}
 
+	public void setPeriod(Period period) {
+		gradeListId.setPeriod(period);
+	}
+
+	@Validate("required")
 	public Subject getSubject() {
-		return subject;
+		return gradeListId.getSubject();
 	}
 
+	public void setSubject(Subject subject) {
+		gradeListId.setSubject(subject);
+	}
+	
+	@Validate("required")
 	public PupilGroup getPupilGroup() {
-		return pupilGroup;
+		return gradeListId.getPupilGroup();
 	}
 
+	public void setPupilGroup(PupilGroup pupilGroup) {
+		gradeListId.setPupilGroup(pupilGroup);
+	}
+
+	@Validate("required")
 	public Teacher getTeacher() {
-		return teacher;
+		return gradeListId.getTeacher();
+	}
+
+	public void setTeacher(Teacher teacher) {
+		gradeListId.setTeacher(teacher);
 	}
 }

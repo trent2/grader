@@ -9,16 +9,48 @@ public class GradeListCompositeId implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@ManyToOne(optional = false)
-	Period period;
+	private Period period;
 
 	@ManyToOne(optional = false)
-	Subject subject;
+	private Subject subject;
 
 	@ManyToOne(optional = false)
-	PupilGroup pupilGroup;
+	private PupilGroup pupilGroup;
 
 	@ManyToOne(optional = false)
-	Teacher teacher;
+	private Teacher teacher;
+
+	public Period getPeriod() {
+		return period;
+	}
+
+	public void setPeriod(Period period) {
+		this.period = period;
+	}
+
+	public Subject getSubject() {
+		return subject;
+	}
+
+	public void setSubject(Subject subject) {
+		this.subject = subject;
+	}
+
+	public PupilGroup getPupilGroup() {
+		return pupilGroup;
+	}
+
+	public void setPupilGroup(PupilGroup pupilGroup) {
+		this.pupilGroup = pupilGroup;
+	}
+
+	public Teacher getTeacher() {
+		return teacher;
+	}
+
+	public void setTeacher(Teacher teacher) {
+		this.teacher = teacher;
+	}
 
 	@Override
 	public boolean equals(Object o) {
