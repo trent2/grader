@@ -18,13 +18,18 @@ public abstract class BasicDAOImpl<T> implements BasicDAO<T> {
 	}
 
 	@Override
-	public void saveOrUpdate(T newSubject) {
-		hsm.getSession().saveOrUpdate(newSubject);
+	public void saveOrUpdate(T t) {
+		hsm.getSession().saveOrUpdate(t);
 	}
 
 	@Override
-	public void delete(T subject) {
-		hsm.getSession().delete(subject);
+	public void persist(T t) {
+		hsm.getSession().persist(t);
+	}
+
+	@Override
+	public void delete(T t) {
+		hsm.getSession().delete(t);
 	}
 
 	@Override

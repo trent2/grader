@@ -14,5 +14,8 @@ public interface BasicDAO<T> {
 	@CommitAfter
 	public void delete(T t);
 
-	public T findById(Serializable id);	
+	public T findById(Serializable id);
+
+	@CommitAfter
+	public void persist(T t);	
 }
