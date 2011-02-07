@@ -1,3 +1,14 @@
 <t:container xml:space="default" xmlns:t="http://tapestry.apache.org/schema/tapestry_5_0_0.xsd">
-  <t:block id="listBlock" />
+  <t:block id="periodBlock">
+  	<t:outputraw value="periodDesc"/>
+  </t:block>
+  <t:block id="subjectBlock">
+  	<t:outputraw value="subjectName"/>
+  </t:block>
+  <t:block id="teacherBlock">
+  	<t:outputraw value="teacherShorty"/>
+  </t:block>
+  <t:block id="pupilGroupBlock">
+  	<t:outputraw value="pupilGroupDesc"/>
+  </t:block>
 </t:container>
