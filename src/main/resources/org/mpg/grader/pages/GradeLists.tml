@@ -1,0 +1,29 @@
+<html t:type="layout" title="${message:heading}" sidebarTitle="${message:sidebar-title}"
+	xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd" xmlns:p="tapestry:parameter">
+	<ul>
+		<li>
+			<t:pagelink page="gradelist/create">${message:create}</t:pagelink>
+		</li>
+	</ul>
+
+	<t:grid source="gradelists" row="gradelist" add="delete, update, copy">
+		<!-- add="period, pupilGroup, subject, delete, update, copy"> <p:periodcell> 
+			${gradelist.gradelistid.period.schoolyear}, ${gradelist.gradelistid.period.schoolterm} 
+			</p:periodcell> <p:pupilgroupcell> ${gradelist.gradelistid.pupilgroup.mnemonic}, 
+			${gradelist.gradelistid.pupilgroup.details} </p:pupilgroupcell> <p:subjectcell> 
+			${gradelist.gradelistid.subject.subjectname}, ${gradelist.gradelistid.subject.form} 
+			</p:subjectcell> <p:teachercell> ${gradelist.gradelistid.teacher.shorty} 
+			</p:teachercell> -->
+		<p:deletecell>
+			<t:actionlink t:id="delete" context="gradelist">${message:delete}
+			</t:actionlink>
+		</p:deletecell>
+		<p:updatecell>
+			<t:pagelink t:id="update" page="gradelist/create" context="gradelist">
+				${message:update} </t:pagelink>
+		</p:updatecell>
+		<p:copycell>
+			Copy
+		</p:copycell>
+	</t:grid>
+</html>
