@@ -10,15 +10,11 @@ import org.mpg.grader.pages.Pupils;
 
 public class CreatePupil {
 	@PageActivationContext
-	@Property(write=false)
+	@Property
 	private Pupil pupil;
 
 	@Inject
 	private PupilDAO pupilDAO;
-
-    public void setPupil(Pupil p) {
-		this.pupil = p;
-	}
 
     public Class<PupilGroup> getPupilGroupClass() {
     	return PupilGroup.class;
@@ -27,7 +23,6 @@ public class CreatePupil {
 	Object onSuccess()
     {
         pupilDAO.saveOrUpdate(pupil);
-
         return Pupils.class;
     }
 }

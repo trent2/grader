@@ -10,16 +10,12 @@ import org.mpg.grader.pages.Teachers;
 public class CreateTeacher {
 
 	@PageActivationContext
-	@Property(write=false)
+	@Property
 	private Teacher teacher;
 
 	@Inject
 	private TeacherDAO teacherDAO;
-
-    public void setTeacher(Teacher t) {
-		this.teacher = t;
-	}
-
+	
 	Object onSuccess()
     {
         teacherDAO.saveOrUpdate(teacher);

@@ -3,6 +3,7 @@ package org.mpg.grader.pages.criterion;
 import org.apache.tapestry5.annotations.InjectPage;
 import org.apache.tapestry5.annotations.PageActivationContext;
 import org.apache.tapestry5.annotations.Property;
+import org.apache.tapestry5.hibernate.annotations.CommitAfter;
 import org.apache.tapestry5.ioc.annotations.Inject;
 import org.mpg.grader.data.CriterionDAO;
 import org.mpg.grader.entities.Criterion;
@@ -20,6 +21,7 @@ public class CreateCriterion {
     @Property
     private Criterion criterion;
 
+    @CommitAfter
 	Object onSuccess()
     {
         criterionDAO.saveOrUpdate(criterion);
