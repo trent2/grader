@@ -5,7 +5,7 @@ import org.mpg.grader.entities.GradeList;
 
 public class GradeListDAOImpl extends BasicDAOImpl<GradeList> implements GradeListDAO {
 
-	protected GradeListDAOImpl() {
+	public GradeListDAOImpl() {
 		super(GradeList.class);
 	}
 
