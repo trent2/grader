@@ -1,11 +1,7 @@
 <html t:type="layout" title="${message:title}"
 	xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd">
 	<body>
-		<t:beaneditform object="pupil" t:submitLabel="message:create">
-			<t:parameter name="pupilGroups">
-				<t:hibernatelistpalette t:id="pupilGroups" entityClass="PupilGroupClass"
-				entityId="shortName" selected="pupil.pupilGroups"/>
-			</t:parameter>
-		</t:beaneditform>
+		<t:beaneditform object="pupil" t:submitLabel="message:create"
+			exclude="pupilGroups" />
 	</body>
 </html>
