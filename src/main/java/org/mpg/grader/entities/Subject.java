@@ -7,7 +7,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.OneToMany;
+import javax.persistence.ManyToMany;
 
 import org.apache.tapestry5.beaneditor.NonVisual;
 import org.apache.tapestry5.beaneditor.Validate;
@@ -25,9 +25,10 @@ public class Subject implements Comparable<Subject> {
 
     public enum FormTypes {Jgst_5, Jgst_6, Jgst_7};
 
+    @Column(nullable = true)
     private FormTypes form;
 
-    @OneToMany
+    @ManyToMany
     @Column(nullable = true)
     private List<Criterion> criteria;
 
