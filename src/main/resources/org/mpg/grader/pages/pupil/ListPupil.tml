@@ -1,0 +1,14 @@
+<html t:type="layout" title="${message:heading}"
+	xmlns:t="http://tapestry.apache.org/schema/tapestry_5_1_0.xsd" xmlns:p="tapestry:parameter">
+	<t:grid source="pupils" row="pupil" add="delete, update">
+		<p:deletecell>
+			<t:actionlink t:id="delete" context="pupil">${message:delete}
+			</t:actionlink>
+		</p:deletecell>
+		<p:updatecell>
+			<t:pagelink t:id="update" page="pupil/create"
+				context="pupil">${message:update}
+				</t:pagelink>
+		</p:updatecell>
+	</t:grid>
+</html>
