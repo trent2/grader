@@ -1,6 +1,7 @@
 package org.mpg.grader.components;
 
 import org.apache.tapestry5.BindingConstants;
+import org.apache.tapestry5.FieldValidator;
 import org.apache.tapestry5.SelectModel;
 import org.apache.tapestry5.ValueEncoder;
 import org.apache.tapestry5.annotations.Component;
@@ -49,13 +50,17 @@ public class HibernateListPalette {
 
 	@Component(parameters = { "selected=prop:context.propertyValue",
 			"encoder=prop:encoder", "model=prop:listModel",
-			"label=prop:context.label"})
+			"label=prop:context.label", "validate=prop:paletteListValidator"})
 	private Palette listPalette;
 
 	public ValueEncoder<?> getEncoder() { 
 		return new HibernateEntityValueEncoder(entityClass, sessionsource
 				.getConfiguration().getClassMapping(entityClass.getCanonicalName()),
 				session, paccess, coercer, logger);
+	}
+
+	public FieldValidator<?> getPaletteListValidator() {
+		return context.getValidator(listPalette);
 	}
 
 	public SelectModel getListModel() {
