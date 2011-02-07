@@ -1,6 +1,6 @@
 package org.mpg.grader.entities;
 
-import java.util.List;
+import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -27,9 +27,8 @@ public class Pupil {
     @Column(length = 30, nullable = false)
 	private String firstName;
 
-    @ManyToMany
-    @Column(nullable = true)
-    private List<PupilGroup> pupilGroups;
+	@ManyToMany(mappedBy="pupils")
+	private Set<PupilGroup> pupilGroups;
 
     public Long getId() {
 		return id;
@@ -55,12 +54,8 @@ public class Pupil {
 		this.firstName = firstName;
 	}
 
-	public List<PupilGroup> getPupilGroups() {
+	public Set<PupilGroup> getPupilGroups() {
 		return pupilGroups;
-	}
-
-	public void setPupilGroups(List<PupilGroup> pupilGroups) {
-		this.pupilGroups = pupilGroups;
 	}
 
 	@Override
